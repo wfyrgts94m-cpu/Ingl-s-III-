@@ -1,0 +1,441 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Inglés III · 3er Parcial 2026B (v2)</title>
+<style>
+:root{--b:#1d5fa8;--d:#12304a;--g:#2f9e6f;--r:#c8372d;--y:#f2b632;--bg:#f3f7fa;--l:#d6e0ea}
+*{box-sizing:border-box}body{margin:0;font:15px/1.5 system-ui,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:#1b2b3a}
+header{background:var(--d);color:#fff;padding:10px 16px;display:flex;justify-content:space-between;align-items:center;gap:8px;position:sticky;top:0;z-index:5;border-bottom:3px solid var(--y)}
+header small{color:#9db4c9;display:block}
+main{max-width:960px;margin:auto;padding:14px}
+.c{background:#fff;border:1px solid var(--l);border-radius:12px;padding:16px;margin-bottom:12px}
+.c small{color:#5b7083}
+button{font:inherit;cursor:pointer;border:1px solid #b8c7d6;background:#fff;border-radius:8px;padding:8px 12px;color:inherit}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--y);outline-offset:1px}
+button:disabled{opacity:.5;cursor:not-allowed}
+.p{background:var(--b);color:#fff;border-color:var(--b)}.g{background:var(--g);color:#fff;border-color:var(--g)}
+input,textarea,select{font:inherit;width:100%;padding:9px;border:1px solid #b8c7d6;border-radius:8px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.row input{flex:1;min-width:160px}
+.bar{height:10px;background:var(--l);border-radius:9px;overflow:hidden;margin:6px 0}.bar i{display:block;height:100%;width:0;background:var(--y);transition:width .3s}
+.opt{display:block;width:100%;text-align:left;margin-top:6px}
+.sel{border-color:var(--b);background:#e8f1fb}.ok{border-color:var(--g);background:#e6f6ef}.no{border-color:var(--r);background:#fdecea}
+.tabs{display:flex;overflow-x:auto;gap:4px;border-bottom:1px solid var(--l)}.tabs button{border:0;border-bottom:3px solid transparent;border-radius:0;background:none;white-space:nowrap}.tabs .on{border-color:var(--b);color:var(--b);font-weight:700}
+.on2{background:var(--d);color:#fff;border-color:var(--d)}
+.fb{margin-top:8px;font-size:13px;padding:8px;border-radius:8px}
+.house{font-size:26px;letter-spacing:3px;min-height:38px}
+.pop{animation:pop .4s}@keyframes pop{50%{transform:scale(1.12)}}@media(prefers-reduced-motion:reduce){.pop{animation:none}}
+.hide{display:none!important}
+.grid2{display:grid;gap:8px;grid-template-columns:1fr 1fr}
+table{width:100%;border-collapse:collapse;font-size:13px}td,th{border-bottom:1px solid var(--l);padding:6px;text-align:left}
+blockquote{margin:8px 0;padding:8px 12px;border-left:4px solid var(--y);background:#fff8e6;font-size:14px}
+.c>button+button{margin-left:8px}
+#toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:var(--d);color:#fff;padding:10px 16px;border-radius:10px;z-index:30;max-width:90%}
+#cm{position:fixed;inset:0;background:#000a;overflow:auto;padding:14px;z-index:20}
+#gb{padding-top:10px;font-size:14px}#gb p{margin:4px 0}#gb .grid{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}#gb .block{display:block}#gb .bg-white{background:#f7fafd;padding:10px;border-radius:8px;border:1px solid var(--l)}#gb .space-y-2>*+*{margin-top:6px}#gb h3{margin:0 0 6px}
+@media print{body *{visibility:hidden}#cp,#cp *{visibility:visible}#cp{position:absolute;left:0;top:0;width:100%}.np{display:none!important}}
+</style></head><body>
+<header><div><b>Inglés III · 3er Parcial 2026B</b><small>Interchange 1 · "Does it have a view?"</small></div><div id="us" class="row hide"><span id="un"></span><button id="lo">Cambiar alumno</button></div></header>
+<main>
+<section id="reg" class="c" style="max-width:520px;margin:24px auto"><h2 style="margin-top:0">Registro de alumno</h2>
+<form id="rf" style="display:grid;gap:10px">
+<label>Nombre completo<input id="rn" required></label>
+<label>Plantel<select id="rs" required><option value="">-- Selecciona --</option><option>CBT Almoloya de Alquisiras</option><option>CBT Villa Guerrero</option></select></label>
+<label>Grupo<input id="rg" required placeholder="301, 302…"></label>
+<button class="p">Comenzar</button></form></section>
+
+<div id="dash" class="hide">
+<div class="c"><div class="row"><button id="mp">📘 Práctica</button><button id="me">📝 Examen</button><button id="vc" class="g" style="margin-left:auto">Ver comprobante</button></div>
+<p id="mi" style="font-size:13px;color:#4a5f73"></p>
+<div class="row" style="justify-content:space-between"><b id="xp"></b><span id="pt"></span></div><div class="bar" id="pb"><i></i></div>
+<div class="house" id="hs"></div><div id="bd"></div></div>
+<div class="c"><div class="tabs" id="tb"></div><div id="gb"></div></div>
+<div class="row" id="sk" style="margin-bottom:10px"></div><div id="ex"></div></div>
+
+<div id="cm" class="hide"><div class="c" style="max-width:720px;margin:auto"><div id="cp"></div>
+<div class="row np" style="margin-top:12px;justify-content:space-between"><button id="cc">← Regresar</button><span id="sd0"></span><button class="p" onclick="print()">Imprimir / PDF</button></div></div></div>
+<div id="dlg" class="hide" style="position:fixed;inset:0;background:#000a;z-index:40;display:flex;align-items:center;justify-content:center;padding:16px"><div class="c" style="max-width:420px;margin:0"><p id="dm"></p><div class="row" style="justify-content:flex-end"><button id="dn">Cancelar</button><button id="dy" class="p">Aceptar</button></div></div></div>
+<div id="toast" class="hide"></div></main>
+<script>
+const SHEET_URL=''; // Opcional: pega aquí la URL de tu Google Apps Script para recibir resultados
+const K='en3v2';
+const T=['Houses & Short Answers','Furniture & Appliances','There is / There are','Dream Homes & /θ/ /ð/'];
+const HINT={1:'Con I/you/we/they usa do; con he/she/it usa does. En respuestas cortas repite el auxiliar: Yes, she does.',2:'Repasa el vocabulario de la caja de arriba: refrigerator, stove, armchair, mirror, rug.',3:'There is + singular, There are + plural. Some en afirmativo; any en negativo y preguntas; no = not any.',4:'/θ/: lengua entre los dientes sin vibrar (think, three). /ð/: con vibración de cuerdas vocales (this, mother).'};
+// Respuestas alternativas aceptadas en los reactivos de escritura
+const ALT={w1_w1:["doesn't","does not"],w2_w1:["refrigerator","fridge"],w3_w1:["there is","there's"],w3_w6:["isn't","is not"]};
+const EMO={w2_w1:'🧊',w2_w2:'🔥',w2_w3:'🪑',w2_w4:'🪞',w2_w5:'🟫'};
+const H=['🏠','🌳','🪟','🚪','🛋️','🪑','🍳','🛏️','🚿','🪞','🖼️','💡','🌷','🚗','🌄','🏊'];
+// --- GRAMMAR EXPLANATIONS (ESPAÑOL) ---
+        const grammarNotes = {
+            1: `
+                <h3 class="font-bold text-lg text-indigo-950 mb-2">📚 Explicación Semana 1: Casas, Departamentos y Respuestas Cortas en Presente Simple</h3>
+                <p class="text-sm leading-relaxed mb-3">
+                    En esta semana aprenderás a describir los tipos de vivienda (<strong>houses</strong> vs <strong>apartments</strong>) y a responder preguntas cerradas sobre la casa usando los auxiliares <strong>Do</strong> y <strong>Does</strong>.
+                </p>
+                <div class="grid md:grid-cols-2 gap-4 text-xs bg-white p-4 rounded-xl border border-indigo-100">
+                    <div>
+                        <strong class="text-indigo-900 block mb-1">Para I / You / We / They:</strong>
+                        <p>• <em>Do you live in a house?</em> -> Yes, I do. / No, I don't.</p>
+                        <p>• <em>Do they have a yard?</em> -> Yes, they do. / No, they don't.</p>
+                    </div>
+                    <div>
+                        <strong class="text-indigo-900 block mb-1">Para He / She / It:</strong>
+                        <p>• <em>Does the apartment have a view?</em> -> Yes, it does. / No, it doesn't.</p>
+                        <p>• <em>Does she live alone?</em> -> Yes, she does. / No, she doesn't.</p>
+                    </div>
+                </div>
+            `,
+            2: `
+                <h3 class="font-bold text-lg text-indigo-950 mb-2">📚 Explicación Semana 2: Muebles y Electrodomésticos (Furniture & Appliances)</h3>
+                <p class="text-sm leading-relaxed mb-3">
+                    Para amueblar una casa es esencial conocer los nombres de los muebles en cada habitación (kitchen, living room, bedroom, bathroom). Ten en cuenta que en inglés la palabra <strong>furniture</strong> es incontable.
+                </p>
+                <div class="grid md:grid-cols-3 gap-3 text-xs bg-white p-4 rounded-xl border border-indigo-100">
+                    <div>
+                        <strong class="text-indigo-900 block mb-1">Living Room:</strong>
+                        <p>Sofa, armchair, coffee table, bookcase, rug.</p>
+                    </div>
+                    <div>
+                        <strong class="text-indigo-900 block mb-1">Kitchen & Appliances:</strong>
+                        <p>Refrigerator (fridge), stove, microwave, dishwasher.</p>
+                    </div>
+                    <div>
+                        <strong class="text-indigo-900 block mb-1">Bedroom & Bathroom:</strong>
+                        <p>Bed, dresser, mirror, shower, closet.</p>
+                    </div>
+                </div>
+            `,
+            3: `
+                <h3 class="font-bold text-lg text-indigo-950 mb-2">📚 Explicación Semana 3: There is / There are y Cuantificadores (Some, Any, No)</h3>
+                <p class="text-sm leading-relaxed mb-3">
+                    Usamos <strong>There is</strong> para objetos en singular y <strong>There are</strong> para plurales al expresar existencia de cosas en un lugar.
+                </p>
+                <div class="space-y-2 text-xs bg-white p-4 rounded-xl border border-indigo-100">
+                    <p>• <strong>Singular:</strong> <em>There's a sofa in the living room. / There isn't a stove.</em></p>
+                    <p>• <strong>Plural Afirmativo (Some):</strong> <em>There are <strong>some</strong> chairs in the kitchen.</em> (Hay algunas sillas)</p>
+                    <p>• <strong>Plural Negativo (Any / No):</strong> <em>There aren't <strong>any</strong> curtains.</em> O también: <em>There are <strong>no</strong> curtains.</em></p>
+                    <p>• <strong>Pregunta (Any):</strong> <em>Are there <strong>any</strong> windows in the bathroom?</em></p>
+                </div>
+            `,
+            4: `
+                <h3 class="font-bold text-lg text-indigo-950 mb-2">📚 Explicación Semana 4: Casas de Ensueño y Pronunciación /θ/ vs /ð/</h3>
+                <p class="text-sm leading-relaxed mb-3">
+                    Revisaremos descripciones de alojamientos extraordinarios y practicaremos la pronunciación de los dos sonidos de la combinación <strong>TH</strong> en inglés.
+                </p>
+                <div class="grid md:grid-cols-2 gap-4 text-xs bg-white p-4 rounded-xl border border-indigo-100">
+                    <div>
+                        <strong class="text-indigo-900 block mb-1">Sonido Sordo /θ/ (Sin vibración vocálica):</strong>
+                        <p>La lengua se coloca entre los dientes y solo expulsa aire suavemente.</p>
+                        <p>Ejemplos: <em>bathroom, third, thanks, three, think.</em></p>
+                    </div>
+                    <div>
+                        <strong class="text-indigo-900 block mb-1">Sonido Sonoro /ð/ (Con vibración de cuerdas):</strong>
+                        <p>La lengua va entre los dientes haciendo vibrar las cuerdas vocales.</p>
+                        <p>Ejemplos: <em>there, mother, another, this, the.</em></p>
+                    </div>
+                </div>
+            `
+        };
+
+        // --- 80 REACTIVOS DATA STRUCTURE ---
+        const exercisesData = {
+            1: {
+                reading: [
+                    { id: 'w1_r1', type: 'mc', prompt: "Read: 'Sarah lives in a small apartment downtown. It doesn't have a yard, but it has a nice balcony with a view.' - Does Sarah live in a house?", options: ["Yes, she does.", "No, she doesn't.", "Yes, it is.", "No, it isn't."], correct: 1 },
+                    { id: 'w1_r2', type: 'mc', prompt: "Read: 'My parents have a big house in the suburbs. It has four bedrooms and a garage.' - Does the house have four bedrooms?", options: ["No, it doesn't.", "Yes, it does.", "Yes, they do.", "No, they don't."], correct: 1 },
+                    { id: 'w1_r3', type: 'mc', prompt: "Read: 'Carlos and Ana live in an apartment. Do they have a garage? No, they park on the street.' - Do Carlos and Ana have a garage?", options: ["Yes, they do.", "No, they don't.", "No, he doesn't.", "Yes, she does."], correct: 1 },
+                    { id: 'w1_r4', type: 'mc', prompt: "Read: 'Do you live alone, Alex? No, I live with two roommates in a house.' - Does Alex live in an apartment?", options: ["Yes, he does.", "No, he doesn't.", "Yes, I do.", "No, I don't."], correct: 1 },
+                    { id: 'w1_r5', type: 'mc', prompt: "Read: 'Our house has a beautiful view of the lake, but it doesn't have a swimming pool.' - Does the house have a view?", options: ["Yes, it does.", "No, it doesn't.", "Yes, it has.", "No, it hasn't."], correct: 0 }
+                ],
+                listening: [
+                    { id: 'w1_l1', type: 'audio_mc', text: "Do you live in a house or an apartment?", prompt: "Listen to the audio question. Select the correct English sentence heard:", options: ["Do you live in a house or an apartment?", "Does she live in a house or an apartment?", "Do they live in a big house?"], correct: 0 },
+                    { id: 'w1_l2', type: 'audio_mc', text: "Does your apartment have a balcony?", prompt: "Listen to the audio question:", options: ["Does your house have a garden?", "Does your apartment have a balcony?", "Do you have a balcony in your house?"], correct: 1 },
+                    { id: 'w1_l3', type: 'audio_mc', text: "Yes, I do. I live in a small house.", prompt: "Listen to the response:", options: ["No, I don't. I live in an apartment.", "Yes, I do. I live in a small house.", "Yes, she does. She lives in a house."], correct: 1 },
+                    { id: 'w1_l4', type: 'audio_mc', text: "No, it doesn't have a view of the park.", prompt: "Listen to the statement:", options: ["No, it doesn't have a view of the park.", "Yes, it has a great view.", "Does it have a view of the park?"], correct: 0 },
+                    { id: 'w1_l5', type: 'audio_mc', text: "Do they have a garage for their car?", prompt: "Listen to the question:", options: ["Does he have a garage?", "Do they have a garage for their car?", "Do you park in the garage?"], correct: 1 }
+                ],
+                writing: [
+                    { id: 'w1_w1', type: 'text', prompt: "Complete with short answer: 'Does he live in an apartment?' -> 'No, he ______.'", correct: "doesn't" },
+                    { id: 'w1_w2', type: 'text', prompt: "Complete with short answer: 'Do you have a yard?' -> 'Yes, I ______.'", correct: "do" },
+                    { id: 'w1_w3', type: 'text', prompt: "Complete the question: '______ your house have a second floor?' (Do / Does)", correct: "Does" },
+                    { id: 'w1_w4', type: 'text', prompt: "Complete the question: '______ they live in Villa Guerrero?' (Do / Does)", correct: "Do" },
+                    { id: 'w1_w5', type: 'text', prompt: "Complete with short answer: 'Does the house have a pool?' -> 'Yes, it ______.'", correct: "does" }
+                ],
+                speaking: [
+                    { id: 'w1_s1', type: 'speak', phrase: "I live in a comfortable house.", prompt: "Pronounce clearly: 'I live in a comfortable house.'" },
+                    { id: 'w1_s2', type: 'speak', phrase: "Does it have a nice view?", prompt: "Pronounce clearly: 'Does it have a nice view?'" },
+                    { id: 'w1_s3', type: 'speak', phrase: "No, it doesn't have a garage.", prompt: "Pronounce clearly: 'No, it doesn't have a garage.'" },
+                    { id: 'w1_s4', type: 'speak', phrase: "Do you live in an apartment?", prompt: "Pronounce clearly: 'Do you live in an apartment?'" },
+                    { id: 'w1_s5', type: 'speak', phrase: "Yes, we do. We love our house.", prompt: "Pronounce clearly: 'Yes, we do. We love our house.'" }
+                ]
+            },
+            2: {
+                reading: [
+                    { id: 'w2_r1', type: 'mc', prompt: "Identify the odd room object: Which item does NOT belong in the kitchen?", options: ["Refrigerator", "Stove", "Sofa", "Microwave"], correct: 2 },
+                    { id: 'w2_r2', type: 'mc', prompt: "Read: 'In my bedroom, I have a big bed, a wooden dresser, and a spacious closet.' - Where is the dresser located?", options: ["In the living room", "In the bedroom", "In the kitchen", "In the bathroom"], correct: 1 },
+                    { id: 'w2_r3', type: 'mc', prompt: "Read: 'The living room has a red armchair, a soft rug, and a coffee table.' - What is next to or under the furniture in the living room?", options: ["A stove", "A rug", "A shower", "A refrigerator"], correct: 1 },
+                    { id: 'w2_r4', type: 'mc', prompt: "Identify the appliance: 'An appliance used to keep food cold and fresh.'", options: ["Stove", "Bookcase", "Refrigerator", "Armchair"], correct: 2 },
+                    { id: 'w2_r5', type: 'mc', prompt: "Read: 'Our dining room has a large table with six chairs.' - What furniture is described?", options: ["Table and chairs", "Sofa and coffee table", "Bed and closet", "Mirror and shower"], correct: 0 }
+                ],
+                listening: [
+                    { id: 'w2_l1', type: 'audio_mc', text: "There is a microwave in the kitchen.", prompt: "Listen to the sentence:", options: ["There is a microwave in the kitchen.", "There is a mirror in the kitchen.", "There is a refrigerator in the bedroom."], correct: 0 },
+                    { id: 'w2_l2', type: 'audio_mc', text: "We need a new bookcase for the living room.", prompt: "Listen to the sentence:", options: ["We need a new table for the kitchen.", "We need a new bookcase for the living room.", "We need a new sofa for the bedroom."], correct: 1 },
+                    { id: 'w2_l3', type: 'audio_mc', text: "Is there a shower in the small bathroom?", prompt: "Listen to the question:", options: ["Is there a mirror in the room?", "Is there a shower in the small bathroom?", "Is there a rug in the bathroom?"], correct: 1 },
+                    { id: 'w2_l4', type: 'audio_mc', text: "Put the clothes inside the closet.", prompt: "Listen to the instruction:", options: ["Put the clothes inside the closet.", "Put the dishes on the stove.", "Put the books on the desk."], correct: 0 },
+                    { id: 'w2_l5', type: 'audio_mc', text: "The armchair is very comfortable.", prompt: "Listen to the statement:", options: ["The bed is very comfortable.", "The armchair is very comfortable.", "The sofa is very expensive."], correct: 1 }
+                ],
+                writing: [
+                    { id: 'w2_w1', type: 'text', prompt: "Write the English word for 'Refrigerador':", correct: "refrigerator" },
+                    { id: 'w2_w2', type: 'text', prompt: "Write the English word for 'Estufa':", correct: "stove" },
+                    { id: 'w2_w3', type: 'text', prompt: "Write the English word for 'Sillón individual':", correct: "armchair" },
+                    { id: 'w2_w4', type: 'text', prompt: "Write the English word for 'Espejo':", correct: "mirror" },
+                    { id: 'w2_w5', type: 'text', prompt: "Write the English word for 'Alfombra':", correct: "rug" }
+                ],
+                speaking: [
+                    { id: 'w2_s1', type: 'speak', phrase: "The stove is in the kitchen.", prompt: "Pronounce clearly: 'The stove is in the kitchen.'" },
+                    { id: 'w2_s2', type: 'speak', phrase: "There is a big mirror in the bathroom.", prompt: "Pronounce clearly: 'There is a big mirror in the bathroom.'" },
+                    { id: 'w2_s3', type: 'speak', phrase: "We have a comfortable sofa.", prompt: "Pronounce clearly: 'We have a comfortable sofa.'" },
+                    { id: 'w2_s4', type: 'speak', phrase: "The refrigerator is next to the counter.", prompt: "Pronounce clearly: 'The refrigerator is next to the counter.'" },
+                    { id: 'w2_s5', type: 'speak', phrase: "I have a wooden bookcase.", prompt: "Pronounce clearly: 'I have a wooden bookcase.'" }
+                ]
+            },
+            3: {
+                reading: [
+                    { id: 'w3_r1', type: 'mc', prompt: "Choose the correct option: '______ a sofa in the living room.'", options: ["There is", "There are", "Is there", "Are there"], correct: 0 },
+                    { id: 'w3_r2', type: 'mc', prompt: "Choose the correct option: '______ three chairs in the dining room.'", options: ["There is", "There are", "There be", "Is there"], correct: 1 },
+                    { id: 'w3_r3', type: 'mc', prompt: "Choose the correct option for affirmative plural: 'There are ______ pictures on the wall.'", options: ["any", "some", "no", "a"], correct: 1 },
+                    { id: 'w3_r4', type: 'mc', prompt: "Choose the correct option for negative: 'There aren't ______ windows in the closet.'", options: ["some", "any", "a", "an"], correct: 1 },
+                    { id: 'w3_r5', type: 'mc', prompt: "Select the equivalent sentence for 'There aren't any curtains.'", options: ["There are some curtains.", "There are no curtains.", "There is no curtains.", "There isn't any curtains."], correct: 1 }
+                ],
+                listening: [
+                    { id: 'w3_l1', type: 'audio_mc', text: "There is a table in the kitchen.", prompt: "Listen to the sentence:", options: ["There is a table in the kitchen.", "There are tables in the kitchen.", "Is there a table in the kitchen?"], correct: 0 },
+                    { id: 'w3_l2', type: 'audio_mc', text: "There are some chairs in the yard.", prompt: "Listen to the sentence:", options: ["There are no chairs in the yard.", "There are some chairs in the yard.", "There aren't any chairs in the yard."], correct: 1 },
+                    { id: 'w3_l3', type: 'audio_mc', text: "Are there any windows in the bedroom?", prompt: "Listen to the question:", options: ["Is there a window in the bedroom?", "Are there any windows in the bedroom?", "There are windows in the bedroom."], correct: 1 },
+                    { id: 'w3_l4', type: 'audio_mc', text: "There is no mirror in the hall.", prompt: "Listen to the statement:", options: ["There is a mirror in the hall.", "There is no mirror in the hall.", "There aren't mirrors in the hall."], correct: 1 },
+                    { id: 'w3_l5', type: 'audio_mc', text: "There aren't any lamps in this room.", prompt: "Listen to the statement:", options: ["There aren't any lamps in this room.", "There are some lamps in this room.", "There is a lamp in this room."], correct: 0 }
+                ],
+                writing: [
+                    { id: 'w3_w1', type: 'text', prompt: "Complete with 'There is' or 'There are': '______ a bookcase in the study.'", correct: "There is" },
+                    { id: 'w3_w2', type: 'text', prompt: "Complete with 'There is' or 'There are': '______ five armchairs in the house.'", correct: "There are" },
+                    { id: 'w3_w3', type: 'text', prompt: "Complete negative sentence: 'There aren't ______ rugs on the floor.' (some / any)", correct: "any" },
+                    { id: 'w3_w4', type: 'text', prompt: "Complete affirmative sentence: 'There are ______ books on the table.' (some / any)", correct: "some" },
+                    { id: 'w3_w5', type: 'text', prompt: "Complete negative with no: 'There are ______ pictures in the kitchen.' (any / no)", correct: "no" }
+                ],
+                speaking: [
+                    { id: 'w3_s1', type: 'speak', phrase: "There is a clock on the wall.", prompt: "Pronounce clearly: 'There is a clock on the wall.'" },
+                    { id: 'w3_s2', type: 'speak', phrase: "There are some chairs in the kitchen.", prompt: "Pronounce clearly: 'There are some chairs in the kitchen.'" },
+                    { id: 'w3_s3', type: 'speak', phrase: "There aren't any curtains here.", prompt: "Pronounce clearly: 'There aren't any curtains here.'" },
+                    { id: 'w3_s4', type: 'speak', phrase: "Is there a garage in the house?", prompt: "Pronounce clearly: 'Is there a garage in the house?'" },
+                    { id: 'w3_s5', type: 'speak', phrase: "There are no mirrors in the bedroom.", prompt: "Pronounce clearly: 'There are no mirrors in the bedroom.'" }
+                ]
+            },
+            4: {
+                reading: [
+                    { id: 'w4_r1', type: 'mc', prompt: "Read: 'The Treehouse Hotel in Costa Rica is located high in the forest. It has no elevator, but it has amazing nature views.' - How do guests reach their rooms?", options: ["By taking an elevator", "By walking/climbing stairs", "By car", "By boat"], correct: 1 },
+                    { id: 'w4_r2', type: 'mc', prompt: "Read: 'Jules Undersea Lodge is an underwater hotel in Florida. Guests must scuba dive to reach their rooms.' - Where is this hotel located?", options: ["High in the trees", "Underneath the sea/water", "In a desert", "On a mountain"], correct: 1 },
+                    { id: 'w4_r3', type: 'mc', prompt: "Which word contains the UNVOICED /θ/ sound (like 'think')?", options: ["There", "Mother", "Third", "This"], correct: 2 },
+                    { id: 'w4_r4', type: 'mc', prompt: "Which word contains the VOICED /ð/ sound (like 'father')?", options: ["Bathroom", "Three", "Thanks", "Another"], correct: 3 },
+                    { id: 'w4_r5', type: 'mc', prompt: "Read: 'My dream home is a glass house on a hill. It has huge windows and a swimming pool.' - What material is special about this dream home?", options: ["Wood", "Glass", "Stone", "Ice"], correct: 1 }
+                ],
+                listening: [
+                    { id: 'w4_l1', type: 'audio_mc', text: "I think this house is third on the list.", prompt: "Listen to the sentence with /θ/ sound:", options: ["I think this house is third on the list.", "I live in a big house with my brother.", "There is a bathroom upstairs."], correct: 0 },
+                    { id: 'w4_l2', type: 'audio_mc', text: "My mother likes that apartment.", prompt: "Listen to the sentence with /ð/ sound:", options: ["My mother likes that apartment.", "My three brothers live here.", "Thank you for the view."], correct: 0 },
+                    { id: 'w4_l3', type: 'audio_mc', text: "Is there a bathroom on the third floor?", prompt: "Listen to the question:", options: ["Is there a bathroom on the third floor?", "Is there a kitchen on the first floor?", "Are there three rooms in the apartment?"], correct: 0 },
+                    { id: 'w4_l4', type: 'audio_mc', text: "The treehouse hotel has a fantastic view.", prompt: "Listen to the description:", options: ["The glass house has a pool.", "The treehouse hotel has a fantastic view.", "The underwater hotel is quiet."], correct: 1 },
+                    { id: 'w4_l5', type: 'audio_mc', text: "There are three bedrooms in another house.", prompt: "Listen to the sentence:", options: ["There are two bedrooms in this house.", "There are three bedrooms in another house.", "They live in a dream house."], correct: 1 }
+                ],
+                writing: [
+                    { id: 'w4_w1', type: 'text', prompt: "Complete with 'think' or 'this': 'I ______ (/θ/ unvoiced) my house is cozy.'", correct: "think" },
+                    { id: 'w4_w2', type: 'text', prompt: "Complete with 'mother' or 'three': 'My ______ (/ð/ voiced) lives in Almoloya.'", correct: "mother" },
+                    { id: 'w4_w3', type: 'text', prompt: "Type the number word with /θ/: '1, 2, ______'", correct: "three" },
+                    { id: 'w4_w4', type: 'text', prompt: "Complete with 'there' or 'third': '______ (/ð/ voiced) is a garden behind the house.'", correct: "There" },
+                    { id: 'w4_w5', type: 'text', prompt: "Type the word for 'Baño' containing the /θ/ sound:", correct: "bathroom" }
+                ],
+                speaking: [
+                    { id: 'w4_s1', type: 'speak', phrase: "There are three bathrooms in the house.", prompt: "Pronounce clearly (/θ/ & /ð/): 'There are three bathrooms in the house.'" },
+                    { id: 'w4_s2', type: 'speak', phrase: "My mother loves this unique hotel.", prompt: "Pronounce clearly (/ð/): 'My mother loves this unique hotel.'" },
+                    { id: 'w4_s3', type: 'speak', phrase: "I think my dream home has a pool.", prompt: "Pronounce clearly (/θ/): 'I think my dream home has a pool.'" },
+                    { id: 'w4_s4', type: 'speak', phrase: "This is another beautiful bedroom.", prompt: "Pronounce clearly (/ð/): 'This is another beautiful bedroom.'" },
+                    { id: 'w4_s5', type: 'speak', phrase: "Thank you for showing me the view.", prompt: "Pronounce clearly (/θ/): 'Thank you for showing me the view.'" }
+                ]
+            }
+        };
+
+        
+// Semana 1: reading y listening reescritos como comprensión (las opciones no repiten el texto)
+const PA="Marta lives in a small apartment on the third floor. It has one bedroom, a kitchen and a balcony. There is no elevator, so she takes the stairs every day. The apartment doesn't have a garage, but Marta doesn't have a car. She likes the view of the park from her balcony.",PB="Tom and Lucy live in a big house with their two dogs. The house has three bedrooms, two bathrooms and a large yard. They don't have a swimming pool, but there is a small lake near the house. In summer, they swim there every weekend.";
+Object.assign(exercisesData[1],{
+reading:[
+{id:'w1_r1',type:'mc',passage:PA,prompt:"Why does Marta take the stairs every day?",options:["The building doesn't have an elevator.","She likes to exercise.","Her apartment is on the first floor.","The elevator is too old."],correct:0},
+{id:'w1_r2',type:'mc',passage:PA,prompt:"Why isn't the lack of a garage a problem for Marta?",options:["She parks on the street.","She doesn't have a car.","She has a balcony.","She lives near the park."],correct:1},
+{id:'w1_r3',type:'mc',passage:PA,prompt:"Does Marta's apartment have a view? Choose the best short answer.",options:["No, it doesn't.","Yes, she does. She sees the park.","Yes, it does. It has a view of the park.","Yes, it does. It has a view of the lake."],correct:2},
+{id:'w1_r4',type:'mc',passage:PB,prompt:"Where do Tom and Lucy swim in summer?",options:["In their yard.","In a swimming pool.","At a friend's house.","In a lake near their house."],correct:3},
+{id:'w1_r5',type:'mc',passage:PB,prompt:"Which sentence is true about Tom and Lucy's house?",options:["It has more bathrooms than bedrooms.","It has a yard but no swimming pool.","It doesn't have a yard.","It has three dogs."],correct:1}],
+listening:[
+{id:'w1_l1',type:'audio_mc',text:"Hi, I'm Ben. I live in a small house with my sister. We have two bedrooms and a nice kitchen, but we don't have a garden.",prompt:"Who does Ben live with?",options:["His sister","His parents","His roommates","Nobody, he lives alone"],correct:0},
+{id:'w1_l2',type:'audio_mc',text:"My apartment doesn't have a balcony, but the living room has a big window. From there, I can see the river.",prompt:"What can the speaker see from the living room window?",options:["The street","The river","The park","The mountains"],correct:1},
+{id:'w1_l3',type:'audio_mc',text:"Maria and Pablo have an apartment downtown. It has two bedrooms. They don't have a garage, so they park on the street.",prompt:"Where do Maria and Pablo park their car?",options:["In a garage","In the yard","On the street","At work"],correct:2},
+{id:'w1_l4',type:'audio_mc',text:"I live in a house with my grandparents. It has a big yard with an apple tree. My grandmother has a small garden, and my grandfather has a workshop in the garage.",prompt:"Who has a workshop?",options:["The grandmother","The speaker","The speaker's sister","The grandfather"],correct:3},
+{id:'w1_l5',type:'audio_mc',text:"Welcome to my home! Downstairs, the house has a kitchen and a living room. Upstairs, it has two bedrooms and one bathroom. My bedroom is the one with the blue door.",prompt:"What does the upstairs of the house have?",options:["Two bedrooms and a bathroom","A kitchen and a living room","Three bedrooms","A garage and a yard"],correct:0}]});
+
+
+// Semanas 2-4: reading y listening de comprensión
+const R=(id,p,q,o,c)=>({id,type:'mc',passage:p,prompt:q,options:o,correct:c}),L=(id,t,q,o,c)=>({id,type:'audio_mc',text:t,prompt:q,options:o,correct:c});
+const PC="Ana is looking for furniture for her new bedroom. She needs a bed and a dresser for her clothes. She doesn't need a desk because she studies in the living room. Her mother gives her an old mirror, and her aunt gives her a soft rug. Ana loves the rug because the floor is cold in the morning.";
+const PD="The kitchen in Leo's apartment is small. It has a refrigerator, a stove and a microwave, but it doesn't have a dishwasher. Leo washes the dishes by hand after dinner. He wants to buy a dishwasher next year.";
+const PE="Sofia's room is small but cozy. There is a bed next to the window, and there are two shelves with some books on the wall. There aren't any curtains, so the sun wakes her up early. There is no desk, so she does her homework on the bed.";
+const PF="Daniel's new apartment has a kitchen with a stove, but there isn't a refrigerator yet. There are three windows in the living room. There aren't any chairs, so he sits on the floor. His friends are bringing some chairs on Saturday.";
+const PG="The Treehouse Hotel is high in the forest in Costa Rica. Guests don't take an elevator; they climb a wooden staircase. From their rooms, they can see monkeys and colorful birds. Many people think this hotel is amazing, but it doesn't have a television.";
+Object.assign(exercisesData[2],{
+reading:[
+R('w2_r1',PC,"What does Ana need for her clothes?",["A dresser","A desk","A mirror","A rug"],0),
+R('w2_r2',PC,"Why doesn't Ana need a desk?",["She studies in the living room.","She doesn't study.","Her aunt has a desk.","The desk is too big."],0),
+R('w2_r3',PC,"Who gives Ana the mirror?",["Her aunt","Her mother","Her friend","Her sister"],1),
+R('w2_r4',PD,"Which appliance is NOT in Leo's kitchen?",["A microwave","A stove","A dishwasher","A refrigerator"],2),
+R('w2_r5',PD,"How does Leo wash the dishes now?",["In a dishwasher","By hand","In the bathroom","He doesn't wash them."],1)],
+listening:[
+L('w2_l1',"In my living room, there is a big sofa and a coffee table. My cat sleeps on the armchair next to the window.","Where does the cat sleep?",["On the sofa","On the armchair","On the rug","On the coffee table"],1),
+L('w2_l2',"My mother cooks every day. She uses the stove for soup and the microwave for warm milk. The refrigerator is full of fruit.","What does the mother use the microwave for?",["For soup","For fruit","For warm milk","For dinner"],2),
+L('w2_l3',"I need a new closet because my clothes don't fit in the old one. I also want a mirror for my bedroom.","Why does the speaker need a new closet?",["The old one is broken.","The clothes don't fit in the old one.","The old one is dirty.","The speaker wants a mirror."],1),
+L('w2_l4',"Our bathroom is very small. It has a shower, a sink and a mirror. We don't have a bathtub.","What does the bathroom NOT have?",["A shower","A sink","A mirror","A bathtub"],3),
+L('w2_l5',"We are in the living room. The bookcase is on the left, and the rug is under the coffee table. The TV is in front of the sofa.","Where is the rug?",["Under the coffee table","In front of the sofa","On the left","Next to the TV"],0)]});
+Object.assign(exercisesData[3],{
+reading:[
+R('w3_r1',PE,"Why does the sun wake Sofia up early?",["There aren't any curtains.","She sleeps near the door.","Her alarm clock is loud.","There is a big lamp."],0),
+R('w3_r2',PE,"Where does Sofia do her homework?",["At a desk","On the bed","On the floor","In the kitchen"],1),
+R('w3_r3',PE,"What is on the wall in Sofia's room?",["Some posters","A mirror","Two shelves with some books","A television"],2),
+R('w3_r4',PF,"What doesn't Daniel's kitchen have yet?",["A stove","A refrigerator","A window","A table"],1),
+R('w3_r5',PF,"Are there any chairs in Daniel's living room?",["Yes, there are.","No, there isn't.","No, there aren't. He sits on the floor.","Yes, there is some."],2)],
+listening:[
+L('w3_l1',"In my bedroom there is a bed and a lamp. There aren't any pictures on the walls, but there are some posters on the door.","What is on the door?",["Some pictures","A lamp","Some posters","Nothing"],2),
+L('w3_l2',"Are there any chairs in the kitchen? Yes, there are two chairs and a small table.","What is in the kitchen?",["Two chairs and a small table","A sofa and a table","Three chairs and a stove","No chairs"],0),
+L('w3_l3',"There is no TV in my room, so I read books before bed. There are many books on my shelf.","What does the speaker do before bed?",["Watches TV","Reads books","Listens to music","Does homework"],1),
+L('w3_l4',"The apartment is nice, but there isn't a closet in the bedroom. There are only two small drawers.","What is the problem in the apartment?",["There isn't a closet in the bedroom.","There aren't any drawers.","The bedroom is too big.","There is no kitchen."],0),
+L('w3_l5',"Is there a park near your house? Yes, there is. There are some trees, and there is a small lake.","What is in the park?",["A swimming pool","Trees and a small lake","Only a playground","A restaurant"],1)]});
+exercisesData[4].reading=exercisesData[4].reading.map(e=>({
+w4_r1:R('w4_r1',PG,"How do guests get to their rooms in the Treehouse Hotel?",["By elevator","By boat","They climb a wooden staircase.","By car"],2),
+w4_r2:R('w4_r2',PG,"What can guests see from their rooms?",["Monkeys and colorful birds","The sea","A big city","Mountains and snow"],0),
+w4_r5:R('w4_r5',PG,"What does the Treehouse Hotel NOT have?",["A wooden staircase","Rooms in the trees","A television","A forest view"],2)}[e.id]||e));
+exercisesData[4].listening=[
+L('w4_l1',"My dream house has three bathrooms, a theater and a big terrace with a view of the sea.","What does the dream house have for watching movies?",["A library","A theater","A garage","A pool"],1),
+L('w4_l2',"In my dream home, my mother and my brother live with me. We share the house, and the kitchen is the biggest room.","Who lives with the speaker?",["Her father and sister","Her mother and brother","Her friends","Nobody"],1),
+L('w4_l3',"Thank you for visiting the treehouse. Thursday is the best day to come because there are fewer people.","Which day is the best to visit?",["Saturday","Tuesday","Thursday","Friday"],2),
+L('w4_l4',"My grandmother's house is on a hill. It has a path through the garden and a small bathroom under the stairs.","Where is the small bathroom?",["Under the stairs","In the garden","Upstairs","Next to the kitchen"],0),
+L('w4_l5',"This is the third floor. On this floor, there are three bedrooms and one big bathroom with a window.","How many bedrooms are on the third floor?",["One","Two","Three","Four"],2)];
+
+const EXTRA=[
+{w:3,s:'writing',id:'w3_w6',type:'text',prompt:"Short answer: 'Is there a stove in the kitchen?' -> 'No, there ______.'",correct:"isn't"},
+{w:3,s:'writing',id:'w3_w7',type:'text',prompt:"Short answer: 'Are there any chairs in the room?' -> 'Yes, there ______.'",correct:"are"},
+{w:4,s:'listening',id:'w4_l6',type:'audio_mc',text:"I have three brothers.",prompt:"Listen. Which word do you hear?",options:["three","tree","free"],correct:0},
+{w:4,s:'listening',id:'w4_l7',type:'audio_mc',text:"Is this your mother?",prompt:"Listen and choose the sentence:",options:["Is this your mother?","Is that your brother?","Is this your father?"],correct:0}];
+['Describe tu casa o departamento en 3 oraciones (¿tiene vista? ¿tiene garage?).','Escribe 4 oraciones sobre los muebles de tu cuarto.','Describe tu sala con There is / There are, some y any (mínimo 3 oraciones).','Describe tu casa de ensueño en 4 oraciones.'].forEach((p,i)=>EXTRA.push({w:i+1,s:'writing',id:`w${i+1}_f`,type:'free',prompt:'✍️ Producción escrita (la revisa tu docente): '+p}));
+const SK=['reading','listening','writing','speaking'],ALL=[];
+EXTRA.forEach(e=>exercisesData[e.w][e.s].push(e));
+for(const w in exercisesData)SK.forEach(s=>exercisesData[w][s].forEach(e=>{e.w=+w;e.s=s;ALL.push(e)}));
+const AUTO=ALL.filter(e=>e.type!='free');
+
+const $=i=>document.getElementById(i);
+const h=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const nz=s=>String(s).toLowerCase().replace(/[’‘´`]/g,"'").replace(/[.!?]+$/,'').replace(/\s+/g,' ').trim();
+const hs=s=>{let x=5381;for(const c of s)x=((x<<5)+x+c.charCodeAt(0))>>>0;return x};
+const rng=a=>()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296};
+function order(e){const r=rng(S.seed^hs(e.id)),o=e.options.map((_,i)=>i);for(let i=o.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[o[i],o[j]]=[o[j],o[i]]}return o}
+let S=null,W=1,SKL='reading',last=Date.now();
+try{S=JSON.parse(localStorage.getItem(K))}catch(e){}
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
+['click','keydown','touchstart'].forEach(v=>addEventListener(v,()=>last=Date.now()));
+// El tiempo solo corre con la pestaña visible y con actividad en el último minuto
+setInterval(()=>{if(S&&!document.hidden&&Date.now()-last<60000){S.t[S.mode]++;if(S.t[S.mode]%5==0)save()}},1000);
+const A=()=>S.a[S.mode];
+const pct=w=>{const l=AUTO.filter(e=>e.w==w&&e.type!='speak');return l.filter(e=>S.a.practice[e.id]?.ok===true).length/l.length};
+const locked=w=>S.mode=='practice'&&w>1&&pct(w-1)<.7;
+const tgl=(e,a)=>S.mode=='exam'&&a&&!(e.type=='speak'&&a.ok===false&&(a.n||1)<3);
+
+$('rf').onsubmit=e=>{e.preventDefault();S={st:{name:$('rn').value.trim(),school:$('rs').value,grade:'3er Semestre',group:$('rg').value.trim(),at:new Date().toLocaleString()},mode:'practice',a:{practice:{},exam:{}},t:{practice:0,exam:0},xp:0,streak:0,x:{},seed:Math.floor(Math.random()*1e9),plays:{}};save();init()};
+$('lo').onclick=()=>ask('Se borrarán el progreso y las respuestas guardadas en este navegador. ¿Continuar?',()=>{try{localStorage.removeItem(K)}catch(e){}location.reload()});
+$('mp').onclick=()=>{S.mode='practice';save();draw()};
+$('me').onclick=()=>{if(S.mode=='exam')return;ask('En el modo examen cada respuesta es definitiva (speaking permite 3 intentos). ¿Comenzar?',()=>{S.mode='exam';save();draw()})};
+$('vc').onclick=cert;$('cc').onclick=()=>$('cm').classList.add('hide');
+
+function init(){$('reg').classList.add('hide');$('dash').classList.remove('hide');$('us').classList.remove('hide');$('un').textContent=S.st.name+' · '+S.st.group;draw()}
+function stats(){
+ const done=Object.keys(A()).length,ok=AUTO.filter(e=>S.a.practice[e.id]?.ok===true).length;
+ $('pt').textContent=`${done} / ${ALL.length} respondidos`;$('pb').firstElementChild.style.width=done/ALL.length*100+'%';
+ $('xp').textContent=`⭐ ${S.xp} XP · Nivel ${Math.floor(S.xp/100)+1} · 🔥 Racha ${S.streak}`;
+ $('hs').textContent=H.slice(0,Math.floor(ok/AUTO.length*H.length)+1).join(' ');
+ $('bd').textContent=[1,2,3,4].filter(w=>pct(w)>=.7).map(w=>'🏅 Semana '+w).join('   ');
+ $('mp').className=S.mode=='practice'?'p':'';$('me').className=S.mode=='exam'?'p':'';
+ $('mi').textContent=S.mode=='practice'?'Práctica: feedback inmediato, reintentos y XP. No cuenta para la calificación. Para abrir una semana necesitas 70% de aciertos en la anterior. Cada acierto nuevo agrega una pieza a tu casa.':'Examen: una sola oportunidad por reactivo, sin pistas ni correcciones. Este modo genera el comprobante oficial.';
+ const tb=$('tb');tb.innerHTML='';
+ T.forEach((t,i)=>{const w=i+1,b=h('button',w==W?'on':'',(locked(w)?'🔒 ':'')+'S'+w+': '+t);b.onclick=()=>{if(locked(w))return toast('Necesitas 70% de aciertos en la Semana '+(w-1)+' (modo práctica).');W=w;draw()};tb.append(b)});
+ const sb=$('sk');sb.innerHTML='';
+ SK.forEach(s=>{const l=exercisesData[W][s],n=l.filter(e=>A()[e.id]).length,b=h('button',s==SKL?'on2':'',`${s[0].toUpperCase()+s.slice(1)} (${n}/${l.length})`);b.onclick=()=>{SKL=s;draw()};sb.append(b)});
+}
+function draw(){
+ if(locked(W))W=1;
+ stats();
+ $('gb').innerHTML=grammarNotes[W]+(W==2?'<p style="font-size:26px;letter-spacing:2px">🛋️ 🪑 🧊 🔥 🪞 🛏️ 🚿 🟫</p>':'');
+ const ex=$('ex');ex.innerHTML='';const l=exercisesData[W][SKL];l.forEach((e,i)=>ex.append(card(e,i,l.length)));
+}
+function upd(e){const l=exercisesData[e.w][e.s];$('c_'+e.id).replaceWith(card(e,l.indexOf(e),l.length));stats()}
+const fbk=e=>h('div','fb no','✗ Respuesta correcta: '+(e.options?e.options[e.correct]:(ALT[e.id]||[e.correct])[0])+'. '+HINT[e.w]);
+
+function card(e,i,n){
+ const c=h('div','c'),a=A()[e.id],ex=S.mode=='exam',lk=tgl(e,a);c.id='c_'+e.id;
+ c.append(h('small','',`Reactivo ${i+1} de ${n} · ${e.s}`+(a?(ex?' · ✓ respondido':a.ok===true?' · ✓ correcto':a.ok===false?' · ✗ intenta de nuevo':' · guardado, lo revisa tu docente'):'')));
+ if(e.passage)c.append(h('blockquote','',e.passage));
+ c.append(h('p','',(EMO[e.id]?EMO[e.id]+' ':'')+e.prompt));
+ if(e.options){
+  if(e.type=='audio_mc'){const k=S.mode+e.id,u=S.plays[k]||0,mx=ex?2:99,b=h('button','p','🔊 Escuchar'+(ex?` (${Math.max(0,mx-u)} restantes)`:''));
+   b.disabled=u>=mx;b.onclick=()=>{S.plays[k]=u+1;save();tts(e.text);upd(e)};const sl=h('button','','🐢 Más lento');sl.disabled=u>=mx;sl.onclick=()=>{S.plays[k]=u+1;save();tts(e.text,.55);upd(e)};c.append(b,sl);
+   if(!u&&!a){c.append(h('p','','Escucha el audio para ver las opciones.'));return c}}
+  order(e).forEach(oi=>{const b=h('button','opt',e.options[oi]);if(a&&a.v===oi)b.classList.add(ex?'sel':a.ok?'ok':'no');b.disabled=lk;b.onclick=()=>answer(e,oi,oi===e.correct);c.append(b)});
+ }else if(e.type=='text'||e.type=='free'){
+  const r=h('div','row'),f=h(e.type=='free'?'textarea':'input');f.value=a?a.v:'';f.placeholder='Escribe aquí…';f.disabled=lk;if(e.type=='free')f.rows=4;
+  const b=h('button','p','Guardar');b.disabled=lk;
+  b.onclick=()=>{const v=f.value.trim();if(!v)return;if(e.type=='free'){if(v.split(/\s+/).length<12)return toast('Escribe al menos 12 palabras.');answer(e,v,null)}else answer(e,v,(ALT[e.id]||[e.correct]).map(nz).includes(nz(v)))};
+  r.append(f,b);c.append(r);
+ }else if(e.type=='speak'){
+  const r=h('div','row'),m=h('button','g','🎤 Grabar'),l=h('button','','🔊 Ejemplo'),x=h('button','','No puedo grabar');m.disabled=x.disabled=lk;
+  l.onclick=()=>tts(e.phrase);m.onclick=()=>listen(e);
+  x.onclick=()=>{if(ex)answer(e,'Sin micrófono: pendiente de revisión docente',null);else toast('Practícalo en voz alta. Sin grabación no suma puntos.')};
+  const sl=h('button','','🐢 Lento');sl.onclick=()=>tts(e.phrase,.55);r.append(m,l,sl,x);c.append(r);
+  if(a&&!ex)c.append(h('p','fb '+(a.ok?'ok':a.ok===false?'no':''),'Reconocido: "'+a.v+'"'+(a.ok?' ✓':a.ok===false?' ✗ Di casi toda la frase. '+HINT[e.w]:'')));
+ }
+ if(!ex&&a&&a.ok===false&&e.type!='speak')c.append(fbk(e));
+ return c;
+}
+function answer(e,v,ok){
+ const m=S.mode,p=S.a[m][e.id];if(tgl(e,p)&&p)return;
+ S.a[m][e.id]={v,ok,n:(p?.n||0)+1};
+ if(m=='practice'){if(ok){S.streak++;beep(1);if(!S.x[e.id]){S.x[e.id]=1;S.xp+=10;const el=$('hs');el.classList.remove('pop');void el.offsetWidth;el.classList.add('pop')}}else if(ok===false){S.streak=0;beep(0)}}
+ save();upd(e);
+}
+function tts(t,r){if(!('speechSynthesis' in window))return toast('Tu navegador no tiene voz sintética.');speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='en-US';u.rate=r||.9;speechSynthesis.speak(u)}
+function listen(e){
+ const R=window.SpeechRecognition||window.webkitSpeechRecognition;
+ if(!R)return toast(S.mode=='exam'?"Tu navegador no reconoce voz. Usa 'No puedo grabar' y tu docente lo revisará.":'Tu navegador no reconoce voz.');
+ const r=new R();r.lang='en-US';
+ r.onresult=ev=>{const sp=ev.results[0][0].transcript,w=s=>nz(s).replace(/'/g,'').replace(/[^a-z0-9 ]/g,'').split(' ').filter(Boolean),t=w(e.phrase),s=w(sp);
+  answer(e,sp,t.filter(x=>s.includes(x)).length/t.length>=.75&&s.length<=t.length*1.5)};
+ r.onerror=()=>toast('No se detectó audio. Intenta otra vez.');toast('Escuchando… habla ahora.');r.start();
+}
+function beep(ok){try{const c=beep.c=beep.c||new AudioContext(),o=c.createOscillator(),g=c.createGain();o.frequency.value=ok?660:200;g.gain.value=.05;o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+.15)}catch(e){}}
+function toast(m){const t=$('toast');t.textContent=m;t.classList.remove('hide');clearTimeout(toast.i);toast.i=setTimeout(()=>t.classList.add('hide'),3200)}
+
+function ask(m,f){$('dm').textContent=m;$('dlg').classList.remove('hide');$('dn').onclick=()=>$('dlg').classList.add('hide');$('dy').onclick=()=>{$('dlg').classList.add('hide');f()}}
+function cert(){
+ const a=S.a.exam,ok=AUTO.filter(e=>a[e.id]?.ok===true).length,n=Object.keys(a).length,sc=(ok/AUTO.length*10).toFixed(1),t=S.t.exam,fast=t<300,
+ pend=ALL.filter(e=>a[e.id]&&a[e.id].ok===null),code=hs(S.st.name+'|'+ok+'|'+t+'|'+JSON.stringify(a)).toString(16).toUpperCase().padStart(8,'0'),
+ tm=Math.floor(t/60)+'m '+t%60+'s',st=(b,y,x)=>`<td>${b?'✓ '+y:'⚠️ '+x}</td>`;
+ $('cp').innerHTML=`<div style="text-align:center"><small>COMPROBANTE DEL EXAMEN</small><h2 style="margin:4px 0">Inglés III · 3er Parcial 2026B</h2></div>
+ <table><tr><td>Alumno</td><td><b>${esc(S.st.name)}</b></td></tr><tr><td>Plantel</td><td>${esc(S.st.school)}</td></tr><tr><td>Grado y grupo</td><td>${esc(S.st.grade)} · ${esc(S.st.group)}</td></tr><tr><td>Fecha de registro</td><td>${esc(S.st.at)}</td></tr></table>
+ ${fast?'<div class="fb no"><b>⚠️ Alerta:</b> tiempo activo menor a 5 minutos. Requiere validación del docente.</div>':''}
+ <div class="grid2" style="margin:10px 0"><div class="c"><small>Respondidos</small><h3 style="margin:0">${n} / ${ALL.length}</h3></div><div class="c"><small>Calificación automática</small><h3 style="margin:0">${sc} / 10</h3></div><div class="c"><small>Tiempo activo</small><h3 style="margin:0">${tm}</h3></div><div class="c"><small>Pendientes de revisión</small><h3 style="margin:0">${pend.length}</h3></div></div>
+ <table><tr><th>Criterio</th><th>Estado</th></tr><tr><td>Entrega completa</td>${st(n==ALL.length,'Cumplido','Faltan '+(ALL.length-n))}</tr><tr><td>Calificación ≥ 6.0</td>${st(sc>=6,'Aprobado','Deficiente')}</tr><tr><td>Tiempo activo ≥ 5 min</td>${st(!fast,'Congruente','Muy rápido')}</tr><tr><td>Revisión docente</td>${st(!pend.length,'Sin pendientes',pend.length+' por revisar')}</tr></table>
+ ${pend.length?'<h4>Respuestas para revisión docente</h4><ul>'+pend.map(e=>`<li><b>${e.s}:</b> ${esc(e.type=='free'?a[e.id].v:e.prompt+' — '+a[e.id].v)}</li>`).join('')+'</ul>':''}
+ <p><small>Código de verificación: <b>${code}</b></small></p>
+ <div class="grid2" style="margin-top:36px;text-align:center"><div style="border-top:1px solid #888">Firma del alumno</div><div style="border-top:1px solid #888">Firma del docente</div></div>`;
+ $('sd0').innerHTML='';
+ if(SHEET_URL){const b=h('button','g','Enviar a mi docente');b.onclick=()=>fetch(SHEET_URL,{method:'POST',mode:'no-cors',body:JSON.stringify({name:S.st.name,school:S.st.school,group:S.st.group,date:S.st.at,score:sc,correct:ok,answered:n,seconds:t,pending:pend.length,code,open:pend.map(e=>e.id+': '+a[e.id].v)})}).then(()=>toast('Resultados enviados ✓')).catch(()=>toast('No se pudo enviar. Imprime el comprobante.'));$('sd0').append(b)}
+ $('cm').classList.remove('hide');
+}
+if(S)init();
+</script></body></html>
