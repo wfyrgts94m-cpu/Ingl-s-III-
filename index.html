@@ -412,10 +412,15 @@ function tts(t,r){if(!('speechSynthesis' in window))return toast('Tu navegador n
 function listen(e){
  const R=window.SpeechRecognition||window.webkitSpeechRecognition;
  if(!R)return toast(S.mode=='exam'?"Tu navegador no reconoce voz. Usa 'No puedo grabar' y tu docente lo revisará.":'Tu navegador no reconoce voz.');
- const r=new R();r.lang='en-US';
- r.onresult=ev=>{const sp=ev.results[0][0].transcript,w=s=>nz(s).replace(/'/g,'').replace(/[^a-z0-9 ]/g,'').split(' ').filter(Boolean),t=w(e.phrase),s=w(sp);
-  answer(e,sp,t.filter(x=>s.includes(x)).length/t.length>=.75&&s.length<=t.length*1.5)};
- r.onerror=()=>toast('No se detectó audio. Intenta otra vez.');toast('Escuchando… habla ahora.');r.start();
+ const r=new R();window._rec=r;r.lang='en-US';r.interimResults=false;r.maxAlternatives=3;let got=false;
+ r.onresult=ev=>{got=true;const w=s=>nz(s).replace(/'/g,'').replace(/[^a-z0-9 ]/g,'').split(' ').filter(Boolean),t=w(e.phrase);let best=ev.results[0][0].transcript,bs=-1;
+  for(const a of ev.results[0]){const s=w(a.transcript),sc=t.filter(x=>s.includes(x)).length/t.length;if(s.length<=t.length*1.5&&sc>bs){bs=sc;best=a.transcript}}
+  answer(e,best,bs>=.75)};
+ r.onerror=ev=>{got=true;toast(({'not-allowed':'Permiso del micrófono denegado. Actívalo en la configuración del navegador.','service-not-allowed':'El reconocimiento de voz está desactivado en este teléfono (activa Siri y el dictado).','no-speech':'No te escuché. Habla más cerca y más fuerte.','audio-capture':'No se encontró el micrófono.','network':'Sin internet para el reconocimiento de voz.'})[ev.error]||'Error de reconocimiento: '+ev.error)};
+ r.onend=()=>{if(!got)toast('No se registró tu voz. Revisa los permisos del micrófono o usa "No puedo grabar".')};
+ r.onaudiostart=()=>toast('🎤 Te escucho… habla ahora.');
+ toast('Preparando micrófono…');setTimeout(()=>{if(!got){try{r.stop()}catch(x){}}},8000);
+ try{r.start()}catch(x){toast('No se pudo iniciar el micrófono.')}
 }
 function beep(ok){try{const c=beep.c=beep.c||new AudioContext(),o=c.createOscillator(),g=c.createGain();o.frequency.value=ok?660:200;g.gain.value=.05;o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+.15)}catch(e){}}
 function toast(m){const t=$('toast');t.textContent=m;t.classList.remove('hide');clearTimeout(toast.i);toast.i=setTimeout(()=>t.classList.add('hide'),3200)}
